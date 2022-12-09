@@ -56,14 +56,14 @@ export default function Board(props) {
     [{
       spawn: 1,
       treasure: "",
-      orientation: 1,
+      orientation: 90,
       shape: "L",
       extra: false,
       used: true
     }, null, {
       spawn: 2,
       treasure: "",
-      orientation: 2,
+      orientation: 0,
       shape: "L",
       extra: false,
       used: true
@@ -72,14 +72,14 @@ export default function Board(props) {
     [{
       spawn: 4,
       treasure: "",
-      orientation: 0,
+      orientation: 180,
       shape: "L",
       extra: false,
       used: true
     }, null, {
       spawn: 3,
       treasure: "",
-      orientation: 3,
+      orientation: 270,
       shape: "L",
       extra: false,
       used: true
