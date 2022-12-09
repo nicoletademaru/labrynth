@@ -15,7 +15,7 @@ export default function Board(props) {
       spawn: 0,
       treasure: "",
       orientation: 0,
-      shape: "I",
+      shape: "A",
       extra: false,
       used: false
     },
@@ -23,7 +23,7 @@ export default function Board(props) {
       spawn: 0,
       treasure: "",
       orientation: 0,
-      shape: "T",
+      shape: "B",
       extra: false,
       used: false
     },
@@ -31,7 +31,7 @@ export default function Board(props) {
       spawn: 0,
       treasure: "",
       orientation: 0,
-      shape: "T",
+      shape: "C",
       extra: false,
       used: false
     },
@@ -39,7 +39,7 @@ export default function Board(props) {
       spawn: 0,
       treasure: "",
       orientation: 0,
-      shape: "I",
+      shape: "D",
       extra: false,
       used: false
     },
@@ -47,7 +47,7 @@ export default function Board(props) {
       spawn: 0,
       treasure: "",
       orientation: 0,
-      shape: "T",
+      shape: "E",
       extra: false,
       used: false
     },
@@ -89,19 +89,24 @@ export default function Board(props) {
   // itr through fixed board
   // if we're on an empty spot pick random number in nonfixedTiles
 
-  // for (let i = 0; i < fixedBoard.length; i++) {
-  //   for (let j = 0; j < fixedBoard.length;) {
-  //     const currTile = fixedBoard[i][j];
-  //     if (!currTile) {
-  //       let randNum = Math.floor(Math.random() * nonfixedTiles.length) + 1;
-  //       if (!nonfixedTiles[randNum].used) {
-  //         fixedBoard[i][j] = nonfixedTiles[randNum];
-  //         nonfixedTiles[randNum].used = true;
-  //         j++;
-  //       }
-  //     }
-  //   }
-  // }
+  for (let i = 0; i < fixedBoard.length; i++) {
+    for (let j = 0; j < fixedBoard.length;) {
+      const currTile = fixedBoard[i][j];
+      if (!currTile) {
+        let randNum = Math.floor(Math.random() * nonfixedTiles.length);
+        console.log(randNum)
+        console.log(nonfixedTiles[randNum].used)
+      
+        if (!nonfixedTiles[randNum].used) {
+          fixedBoard[i][j] = nonfixedTiles[randNum];
+          nonfixedTiles[randNum].used = true;
+          j++;
+        } 
+      } else {
+        j++;
+      }
+    }
+  }
 
   return (
     <div>
