@@ -9,12 +9,18 @@ export default function Board(props) {
   // const [orientation, setOrientation] = useState(null); // num
   // const [shape, setShape] = useState(null); // string/char
   // const [extra, setExtra] = useState(null); // bool
-  
+
+  function getRandOrientation() {
+    const orientations = [0, 90, 180, 270]
+
+    return orientations[Math.floor(Math.random()* orientations.length)]
+  }
+
   const nonfixedTiles = [
     {
       spawn: 0,
       treasure: "",
-      orientation: 0,
+      orientation: getRandOrientation(),
       shape: "A",
       extra: false,
       used: false
@@ -22,7 +28,7 @@ export default function Board(props) {
     {
       spawn: 0,
       treasure: "",
-      orientation: 0,
+      orientation: getRandOrientation(),
       shape: "B",
       extra: false,
       used: false
@@ -30,7 +36,7 @@ export default function Board(props) {
     {
       spawn: 0,
       treasure: "",
-      orientation: 0,
+      orientation: getRandOrientation(),
       shape: "C",
       extra: false,
       used: false
@@ -38,7 +44,7 @@ export default function Board(props) {
     {
       spawn: 0,
       treasure: "",
-      orientation: 0,
+      orientation: getRandOrientation(),
       shape: "D",
       extra: false,
       used: false
@@ -46,7 +52,7 @@ export default function Board(props) {
     {
       spawn: 0,
       treasure: "",
-      orientation: 0,
+      orientation: getRandOrientation(),
       shape: "E",
       extra: false,
       used: false
