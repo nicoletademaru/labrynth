@@ -210,21 +210,21 @@ export default function Board(props) {
   // itr through fixed board
   // if we're on an empty spot pick random number in nonfixedTiles
 
-  // for (let i = 0; i < fixedBoard.length; i++) {
-  //   for (let j = 0; j < fixedBoard.length;) {
-  //     const currTile = fixedBoard[i][j];
-  //     if (!currTile) {
-  //       let randNum = Math.floor(Math.random() * nonfixedTilesArray.length);
-  //       if (!nonfixedTilesArray[randNum].used) {
-  //         fixedBoard[i][j] = nonfixedTilesArray[randNum];
-  //         nonfixedTilesArray[randNum].used = true;
-  //         j++;
-  //       } 
-  //     } else {
-  //       j++;
-  //     }
-  //   }
-  // }
+  for (let i = 0; i < fixedBoard.length; i++) {
+    for (let j = 0; j < fixedBoard.length;) {
+      const currTile = fixedBoard[i][j];
+      if (!currTile) {
+        let randNum = Math.floor(Math.random() * nonfixedTilesArray.length);
+        if (!nonfixedTilesArray[randNum].used) {
+          fixedBoard[i][j] = nonfixedTilesArray[randNum];
+          nonfixedTilesArray[randNum].used = true;
+          j++;
+        } 
+      } else {
+        j++;
+      }
+    }
+  }
 
   return (
     <div>
