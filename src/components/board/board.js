@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Tile from "../tile/tile.jsx";
+import Tile from "../tile/tile";
+import Path from "../path/path"
 import "./board.css";
 
 export default function Board(props) {
@@ -42,50 +43,8 @@ export default function Board(props) {
     nonfixedTilesArray.push(tile)
   }
 
-  // const nonfixedTiles = [
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "A",
-  //     extra: false,
-  //     used: false
-  //   },
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "B",
-  //     extra: false,
-  //     used: false
-  //   },
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "C",
-  //     extra: false,
-  //     used: false
-  //   },
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "D",
-  //     extra: false,
-  //     used: false
-  //   },
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "E",
-  //     extra: false,
-  //     used: false
-  //   },
-  // ];
   const fixedBoard = [
-    [{
+    [{ 
       spawn: 1,
       treasure: "",
       orientation: 90,
@@ -113,8 +72,7 @@ export default function Board(props) {
       shape: "L",
       extra: false,
       used: true
-    }
-  ],
+    }],
     [null, null, null, null, null, null, null],
     [{
       spawn: 0,
@@ -207,6 +165,16 @@ export default function Board(props) {
     }
   ]]; // matrix filled with every fixed tile
 
+  const pathway = [
+    {clicked: false},
+    {clicked: false},
+    {clicked: false},
+    {clicked: false},
+    {clicked: false},
+    {clicked: false},
+    {clicked: false}
+  ]
+
   // itr through fixed board
   // if we're on an empty spot pick random number in nonfixedTiles
 
@@ -228,11 +196,23 @@ export default function Board(props) {
 
   return (
     <div>
-      <ul className="gameboard">
+      <div>
+        {
+          <div className="pathway">
+            {
+              pathway.map((path, idx) => (
+                <ul>
+                  <Path key={`${idx}-path`} path={path}></Path>
+                </ul>
+              ))
+            }
+          </div>
+        }
+      <div className="gameboard">
         {
           fixedBoard.map((row, colIdx) => (
             <ul key={colIdx}>
-              {
+              { 
                 row.map((tile, rowIdx) => (
                   <Tile key={`${rowIdx}-tile`} tile={tile}></Tile>
                 ))
@@ -240,7 +220,19 @@ export default function Board(props) {
             </ul>
           ))
         }
-      </ul>
+      </div>
+        {
+          <div className="pathway">
+            {
+              pathway.map((path, idx) => (
+                <ul>
+                  <Path key={`${idx}-path`} path={path}></Path>
+                </ul>
+              ))
+            }
+          </div>
+        }
+      </div>
     </div>
   );
 }

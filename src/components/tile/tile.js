@@ -19,8 +19,6 @@ export default function Tile(props) {
   }, [props])
 
   return (
-    <div>
-      <p className="tile" style={{ transform: `rotate(${orientation}deg)` }}>{shape}</p>
-    </div>
+    <p className="tile" style={{ transform: `rotate(${orientation}deg)` }}>{shape}</p>
   );
 }

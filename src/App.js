@@ -1,7 +1,8 @@
 import logo from './logo.svg';
-import Tile from './components/tile/tile.jsx';
+// import Tile from './components/tile';
 import './App.css';
-import Board from './components/board/board.jsx';
+// import Board from './components/board/board';
+import Game from './components/game/game'
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
       extra: false,
       used: true
     }}></Tile> */}
-        <Board></Board>
+        {/* <Board></Board> */}
+        <Game></Game>
       </header>
     </div>
   );
