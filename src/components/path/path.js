@@ -13,7 +13,7 @@ export default function Path(props) {
         break;
       default:          
         ctx.fillStyle = "##1E2127";
-        ctx.fillRect(0, 0, 80, 80);
+        ctx.clearRect(0, 0, 80, 80);
         break;
     }
   }
