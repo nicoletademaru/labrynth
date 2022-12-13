@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from "react";
-import Tile from "../tile/tile.jsx";
+import Tile from "../tile/tile";
 import "./board.css";
 
 export default function Board(props) {
-
-  // const [spawn, setSpawn] = useState(null); // num
-  // const [treasure, setTreasure] = useState(null); // string
-  // const [orientation, setOrientation] = useState(null); // num
-  // const [shape, setShape] = useState(null); // string/char
-  // const [extra, setExtra] = useState(null); // bool
-
   function getRandOrientation() {
     const orientations = [0, 90, 180, 270]
-
-    return orientations[Math.floor(Math.random()* orientations.length)]
+    return orientations[Math.floor(Math.random() * orientations.length)]
   }
   const nonfixedTilesArray = [];
+
+  const nonfixedTreasures = [
+    "owl",
+    "spider",
+    "lizard",
+    "mouse",
+    "moth",
+    "scarab",
+    "lady",
+    "bat",
+    "wildThing",
+    "dragon",
+    "ghost",
+    "djinn"
+  ];
+  let treasureIdx = 0;
 
   for (let i = 0; i < 34; i++) {
     let tile = {
@@ -28,11 +36,18 @@ export default function Board(props) {
     if (i === 0) tile.extra = true; 
     
     switch (true) {
+      case (i < 6): // treasure and L
+        tile.shape = "L"
+        tile.treasure = nonfixedTreasures[treasureIdx];
+        treasureIdx++;
+        break;
       case (i < 15):
         tile.shape = "L";
         break;
       case (i < 21):
         tile.shape = "T";
+        tile.treasure = nonfixedTreasures[treasureIdx];
+        treasureIdx++;
         break;
       default:
         tile.shape = "I"
@@ -42,48 +57,6 @@ export default function Board(props) {
     nonfixedTilesArray.push(tile)
   }
 
-  // const nonfixedTiles = [
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "A",
-  //     extra: false,
-  //     used: false
-  //   },
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "B",
-  //     extra: false,
-  //     used: false
-  //   },
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "C",
-  //     extra: false,
-  //     used: false
-  //   },
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "D",
-  //     extra: false,
-  //     used: false
-  //   },
-  //   {
-  //     spawn: 0,
-  //     treasure: "",
-  //     orientation: getRandOrientation(),
-  //     shape: "E",
-  //     extra: false,
-  //     used: false
-  //   },
-  // ];
   const fixedBoard = [
     [{
       spawn: 1,
@@ -94,14 +67,14 @@ export default function Board(props) {
       used: true
     }, null, {
       spawn: 0,
-      treasure: "",
+      treasure: "book",
       orientation: 270,
       shape: "T",
       extra: false,
       used: true
     }, null, {
       spawn: 0,
-      treasure: "",
+      treasure: "coins",
       orientation: 270,
       shape: "T",
       extra: false,
@@ -118,28 +91,28 @@ export default function Board(props) {
     [null, null, null, null, null, null, null],
     [{
       spawn: 0,
-      treasure: "",
+      treasure: "map",
       orientation: 0,
       shape: "T",
       extra: false,
       used: true
     }, null,{
       spawn: 0,
-      treasure: "",
+      treasure: "crown",
       orientation: 270,
       shape: "T",
       extra: false,
       used: true
     }, null,{
       spawn: 0,
-      treasure: "",
+      treasure: "keys",
       orientation: 180,
       shape: "T",
       extra: false,
       used: true
     }, null,{
       spawn: 0,
-      treasure: "",
+      treasure: "skull",
       orientation: 180,
       shape: "T",
       extra: false,
@@ -148,28 +121,28 @@ export default function Board(props) {
     [null, null, null, null, null, null, null], 
     [{
       spawn: 0,
-      treasure: "",
+      treasure: "ring",
       orientation: 0,
       shape: "T",
       extra: false,
       used: true
     }, null,{
       spawn: 0,
-      treasure: "",
+      treasure: "chest",
       orientation: 0,
       shape: "T",
       extra: false,
       used: true
     }, null,{
       spawn: 0,
-      treasure: "",
+      treasure: "emerald",
       orientation: 90,
       shape: "T",
       extra: false,
       used: true
     }, null,{
       spawn: 0,
-      treasure: "",
+      treasure: "sword",
       orientation: 180,
       shape: "T",
       extra: false,
@@ -185,14 +158,14 @@ export default function Board(props) {
       used: true
     }, null, {
       spawn: 0,
-      treasure: "",
+      treasure: "menorah",
       orientation: 90,
       shape: "T",
       extra: false,
       used: true
     }, null, {
       spawn: 0,
-      treasure: "",
+      treasure: "helmet",
       orientation: 90,
       shape: "T",
       extra: false,
@@ -219,7 +192,7 @@ export default function Board(props) {
           fixedBoard[i][j] = nonfixedTilesArray[randNum];
           nonfixedTilesArray[randNum].used = true;
           j++;
-        } 
+        }
       } else {
         j++;
       }
@@ -231,7 +204,7 @@ export default function Board(props) {
       <ul className="gameboard">
         {
           fixedBoard.map((row, colIdx) => (
-            <ul key={colIdx}>
+            <ul key={colIdx} style={{ padding: "3px" }}>
               {
                 row.map((tile, rowIdx) => (
                   <Tile key={`${rowIdx}-tile`} tile={tile}></Tile>
@@ -241,6 +214,7 @@ export default function Board(props) {
           ))
         }
       </ul>
+      <Tile tile={nonfixedTilesArray.filter((tile) => !tile.used)[0]}></Tile>
     </div>
   );
 }
