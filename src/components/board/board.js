@@ -60,17 +60,17 @@ export default function Board(props) {
 
   const fixedBoard = [
     [
-      {clicked: false},
-      {clicked: false},
-      {clicked: false},
-      {clicked: false},
-      {clicked: false},
-      {clicked: false},
-      {clicked: false},
-      {clicked: false},
-      {clicked: false}
+      {clicked: false, valid: false},
+      {clicked: false,valid: false},
+      {clicked: false, valid: true},
+      {clicked: false, valid: false},
+      {clicked: false, valid: true},
+      {clicked: false, valid: false},
+      {clicked: false, valid: true},
+      {clicked: false, valid: false},
+      {clicked: false, valid: false}
     ],
-    [{clicked: false}, { 
+    [{clicked: false, valid: false}, { 
       spawn: 1,
       treasure: "",
       orientation: 90,
@@ -98,9 +98,9 @@ export default function Board(props) {
       shape: "L",
       extra: false,
       used: true
-    }, {clicked: false}],
-    [{clicked: false}, null, null, null, null, null, null, null, {clicked: false}],
-    [{clicked: false}, {
+    }, {clicked: false, valid: false}],
+    [{clicked: false, valid: true}, null, null, null, null, null, null, null, {clicked: false, valid: true}],
+    [{clicked: false, valid: false}, {
       spawn: 0,
       treasure: "map",
       orientation: 0,
@@ -128,9 +128,9 @@ export default function Board(props) {
       shape: "T",
       extra: false,
       used: true
-    }, {clicked: false}],
-    [{clicked: false}, null, null, null, null, null, null, null, {clicked: false}], 
-    [{clicked: false}, {
+    }, {clicked: false, valid: false}],
+    [{clicked: false, valid: true}, null, null, null, null, null, null, null, {clicked: false, valid: true}], 
+    [{clicked: false, valid: false}, {
       spawn: 0,
       treasure: "ring",
       orientation: 0,
@@ -158,9 +158,9 @@ export default function Board(props) {
       shape: "T",
       extra: false,
       used: true
-    }, {clicked: false}],
-    [{clicked: false}, null, null, null, null, null, null, null, {clicked: false}],   
-    [{clicked: false}, {
+    }, {clicked: false, valid: false}],
+    [{clicked: false, valid: true}, null, null, null, null, null, null, null, {clicked: false, valid: true}],   
+    [{clicked: false, valid: false}, {
       spawn: 3,
       treasure: "",
       orientation: 180,
@@ -188,17 +188,17 @@ export default function Board(props) {
       shape: "L",
       extra: false,
       used: true
-    }, {clicked: false} ]
+    }, {clicked: false, valid: false} ]
   , [
-    {clicked: false},
-    {clicked: false},
-    {clicked: false},
-    {clicked: false},
-    {clicked: false},
-    {clicked: false},
-    {clicked: false},
-    {clicked: false},
-    {clicked: false}
+    { clicked: false, valid: false },
+    {clicked: false, valid: false},
+    {clicked: false, valid: true},
+    {clicked: false, valid: false},
+    {clicked: false, valid: true},
+    {clicked: false, valid: false},
+    {clicked: false, valid: true},
+    {clicked: false, valid: false},
+    {clicked: false, valid: false}
   ]]; // matrix filled with every fixed tile
 
   // itr through fixed board
