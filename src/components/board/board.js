@@ -59,7 +59,18 @@ export default function Board(props) {
   }
 
   const fixedBoard = [
-    [{ 
+    [
+      {clicked: false},
+      {clicked: false},
+      {clicked: false},
+      {clicked: false},
+      {clicked: false},
+      {clicked: false},
+      {clicked: false},
+      {clicked: false},
+      {clicked: false}
+    ],
+    [{clicked: false}, { 
       spawn: 1,
       treasure: "",
       orientation: 90,
@@ -87,9 +98,9 @@ export default function Board(props) {
       shape: "L",
       extra: false,
       used: true
-    }],
-    [null, null, null, null, null, null, null],
-    [{
+    }, {clicked: false}],
+    [{clicked: false}, null, null, null, null, null, null, null, {clicked: false}],
+    [{clicked: false}, {
       spawn: 0,
       treasure: "map",
       orientation: 0,
@@ -117,9 +128,9 @@ export default function Board(props) {
       shape: "T",
       extra: false,
       used: true
-    }],
-    [null, null, null, null, null, null, null], 
-    [{
+    }, {clicked: false}],
+    [{clicked: false}, null, null, null, null, null, null, null, {clicked: false}], 
+    [{clicked: false}, {
       spawn: 0,
       treasure: "ring",
       orientation: 0,
@@ -147,9 +158,9 @@ export default function Board(props) {
       shape: "T",
       extra: false,
       used: true
-    }],
-    [null, null, null, null, null, null, null],   
-    [{
+    }, {clicked: false}],
+    [{clicked: false}, null, null, null, null, null, null, null, {clicked: false}],   
+    [{clicked: false}, {
       spawn: 3,
       treasure: "",
       orientation: 180,
@@ -177,10 +188,10 @@ export default function Board(props) {
       shape: "L",
       extra: false,
       used: true
-    }
-  ]]; // matrix filled with every fixed tile
-
-  const pathway = [
+    }, {clicked: false} ]
+  , [
+    {clicked: false},
+    {clicked: false},
     {clicked: false},
     {clicked: false},
     {clicked: false},
@@ -188,7 +199,7 @@ export default function Board(props) {
     {clicked: false},
     {clicked: false},
     {clicked: false}
-  ]
+  ]]; // matrix filled with every fixed tile
 
   // itr through fixed board
   // if we're on an empty spot pick random number in nonfixedTiles
@@ -196,11 +207,11 @@ export default function Board(props) {
   for (let i = 0; i < fixedBoard.length; i++) {
     for (let j = 0; j < fixedBoard.length;) {
       const currTile = fixedBoard[i][j];
-      if (!currTile) {
+      if (currTile === null) {
         let randNum = Math.floor(Math.random() * nonfixedTilesArray.length);
         if (!nonfixedTilesArray[randNum].used) {
           fixedBoard[i][j] = nonfixedTilesArray[randNum];
-          nonfixedTilesArray[randNum].used = true;
+          nonfixedTilesArray[randNum].used = true;  
           j++;
         }
       } else {
@@ -211,41 +222,21 @@ export default function Board(props) {
 
   return (
     <div>
-      <div>
-        {
-          <div className="pathway">
-            {
-              pathway.map((path, idx) => (
-                <ul>
-                  <Path key={`${idx}-path`} path={path}></Path>
-                </ul>
-              ))
-            }
-          </div>
-        }
       <div className="gameboard">
         {
           fixedBoard.map((row, colIdx) => (
             <ul key={colIdx} style={{ padding: "3px" }}>
               {
-                row.map((tile, rowIdx) => (
-                  <Tile key={`${rowIdx}-tile`} tile={tile}></Tile>
-                ))
+                row.map((piece, rowIdx) => {
+                  if (rowIdx === 0 || colIdx === 0 || colIdx === row.length - 1 || rowIdx === fixedBoard.length - 1) {
+                    // return <div>hi</div>
+                    return <Path key={`${rowIdx}-path`} path={piece}></Path>
+                  } 
+                    return <Tile key={`${rowIdx}-tile`} tile={piece}></Tile>
+                })
               }
             </ul>
           ))
-        }
-      </div>
-        {
-          <div className="pathway">
-            {
-              pathway.map((path, idx) => (
-                <ul>
-                  <Path key={`${idx}-path`} path={path}></Path>
-                </ul>
-              ))
-            }
-          </div>
         }
       </div>
       <Tile tile={nonfixedTilesArray.filter((tile) => !tile.used)[0]}></Tile>
